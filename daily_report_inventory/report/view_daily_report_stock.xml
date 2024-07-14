@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <data>
+        <record id="paperformat_lowmargin" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+       </record>
+           <report id="stock_daily_request_report"
+                string="Rekaptulasi Report Stok" 
+                model="daily.report.inventory" 
+                report_type="qweb-pdf"
+                file="daily_report_inventory.action_daily_report_view_stock" 
+                name="daily_report_inventory.action_daily_report_view_stock"/>
+             <record id="daily_report_inventory.stock_daily_request_report" model="ir.actions.report">
+                <field name="paperformat_id" ref="daily_report_inventory.paperformat_lowmargin" />
+           </record>
+    </data>
+</odoo>

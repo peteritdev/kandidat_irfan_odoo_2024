@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="action_daily_report_view_stock">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            
+                    <div class="page">
+                        <div style="padding-bottom:15px !important;" class="oe_structure" />
+                        <h2 align="center"><strong>DAILY REPORT INVENTORY</strong></h2><br/>
+                        
+                        <t t-if="form.get('warehouse')">
+                        <div class="row mt48 mb32">
+                            <div class="col-auto" name="div_warehouse">
+                                <strong>Warehouse:</strong><t></t> <t t-esc="form.get('warehouse')"/>
+                                <p><strong>Date:</strong> <t></t> <t t-esc="form.get('start_date')"/><t> - </t><t t-esc="form.get('end_date')"/></p>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="form.get('product')">
+                        <div class="row mt48 mb32">
+                            <div class="col-auto" name="div_product">
+                                <strong>Product:</strong><t></t> <t t-esc="form.get('product')"/>
+                                <p><strong>Date:</strong> <t></t> <t t-esc="form.get('start_date')"/><t> - </t><t t-esc="form.get('end_date')"/></p>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="form.get('warehouse') and form.get('product')">
+                        <div class="row mt48 mb32">
+                            <div class="col-auto" name="div_warehouse">
+                                <strong>Warehouse:</strong><t></t> <t t-esc="form.get('warehouse')"/>
+                                <p><strong>Product:</strong><t></t> <t t-esc="form.get('product')"/></p>
+                                <p><strong>Date:</strong><t></t> <t t-esc="form.get('start_date')"/><t> - </t><t t-esc="form.get('end_date')"/></p>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="not form.get('warehouse') and not form.get('product')">
+                        <div class="row mt48 mb32">
+                            <div class="col-auto" name="div_date">
+                                <strong>Date:</strong> <t></t> <t t-esc="form.get('start_date')"/><t> - </t><t t-esc="form.get('end_date')"/>
+                            </div>
+                        </div>
+                    </t>
+
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>code SKU</th>
+                                    <th>Produk</th>
+                                    <th>Unit</th>
+                                    <th>Saldo Awal</th>
+                                    <th>Total Masuk</th>
+                                    <th>Total Keluar</th>
+                                    <th>Saldo Akhir</th>
+                                </tr>
+                                </thead>
+                            <tbody>
+                                <!-- <t t-set="sum_row1" t-value="0"/>
+                                <t t-set="sum_row2" t-value="0"/> -->
+                        <t t-if="form.get('warehouse')">
+                                <tr t-foreach="form.get('stock')" t-as="p">
+                                    <td><span t-esc="p.get('code_product')"/></td>
+                                    <td><span t-esc="p.get('product_id')"/></td>
+                                    <td><span t-esc="p.get('product_uom')"/></td>
+                                    <td><span t-esc="p.get('stock_inventory')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_in')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_out')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_remaining')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                </tr>
+                        </t>
+                        <t t-if="form.get('product')">
+                            <tr t-foreach="form.get('stock')" t-as="e">
+                                <td style="border:1px solid black;" colspan="7"><strong><t t-esc="e.get('name')"/></strong></td>
+                                <tr t-foreach="e.get('warehouse')" t-as="p">
+                                    <td><span t-esc="p.get('code_product')"/></td>
+                                    <td><span t-esc="p.get('product_id')"/></td>
+                                    <td><span t-esc="p.get('product_uom')"/></td>
+                                    <td><span t-esc="p.get('stock_inventory')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_in')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_out')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_remaining')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                </tr>
+                            </tr>
+                        </t>
+                        <t t-if="form.get('product') and form.get('warehouse')">
+                            <tr t-foreach="form.get('stock')" t-as="p">
+                                <td><span t-esc="p.get('code_product')"/></td>
+                                <td><span t-esc="p.get('product_id')"/></td>
+                                <td><span t-esc="p.get('product_uom')"/></td>
+                                <td><span t-esc="p.get('stock_inventory')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                <td><span t-esc="p.get('stock_in')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                <td><span t-esc="p.get('stock_out')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                <td><span t-esc="p.get('stock_remaining')" t-options='{"widget": "float", "precision": 4}'/></td>
+                            </tr>
+                        </t>
+                        <t t-if="not form.get('warehouse') and not form.get('product')">
+                            <tr t-foreach="form.get('stock')" t-as="e">
+                                <td style="border:1px solid black;" colspan="7"><strong><t t-esc="e.get('name')"/></strong></td>
+                                <tr t-foreach="e.get('warehouse')" t-as="p">
+                                    <td><span t-esc="p.get('code_product')"/></td>
+                                    <td><span t-esc="p.get('product_id')"/></td>
+                                    <td><span t-esc="p.get('product_uom')"/></td>
+                                    <td><span t-esc="p.get('stock_inventory')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_in')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_out')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                    <td><span t-esc="p.get('stock_remaining')" t-options='{"widget": "float", "precision": 4}'/></td>
+                                </tr>
+                            </tr>
+                        </t>
+                            </tbody>
+                            <!-- <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-left"><span><strong>Total</strong></span></td>
+                                        <td><span t-esc="(sum_row1)" t-options='{"widget": "float", "precision": 4}'/></td>
+                                        <td></td>
+                                        <td><span t-esc="'{0:,.2f}'.format(int(sum_row2))"
+                                                t-esc-options='{"widget": "monetary", "display_currency": currency}'/></td>
+                                        <td></td>
+                                    </tr> 
+                                </tfoot> -->
+                        </table>
+                        <th>Tanggal Cetak : </th><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%A %Y-%m-%d')"/>
+
+                    </div>
+                </t>
+            </t>
+    </template>
+</odoo>

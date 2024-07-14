@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="daily_report_inventory_form" model="ir.ui.view">
+        <field name="name">daily.report.inventory.form</field>
+        <field name="model">daily.report.inventory</field>
+        <field name="arch" type="xml">
+            <form>
+                 <sheet>
+                    <group>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="warehouse_id"/>
+                        <field name="product_id"/>
+                   </group>
+                   <footer>
+                     <button string="Print" name="print_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" />  
+                </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record id="action_daily_report_inventory" model="ir.actions.act_window">
+          <field name="name">Daily Report Inventory</field>
+          <field name="res_model">daily.report.inventory</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="daily_report_inventory_form"/> 
+          <field name="target">new</field>
+    </record>
+
+    <menuitem id="daily_report_inventory_menu" 
+              name="Daily Report Stock"
+              parent="stock.menu_warehouse_report" 
+              action="action_daily_report_inventory"
+              sequence="5"/>
+    
+</odoo>
