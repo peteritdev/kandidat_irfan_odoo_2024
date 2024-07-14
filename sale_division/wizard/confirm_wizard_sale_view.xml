@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_confirm_wizard" model="ir.ui.view">
+        <field name="name">confirm.wizard.form</field>
+        <field name="model">confirm.wizard.sale</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Sale Order">
+            <group>
+                <div class="oe_title">
+                    <h4>
+                        <field name="message_warning"/>
+                    </h4>
+                </div>
+            </group>
+            <group>
+                <div class="oe_title">
+                    <h4>
+                        <field name="over_limit_message"/>
+                        <field name="over_limit_value" widget='monetary'/>
+                    </h4>
+                </div>
+            </group>
+            <group>
+                <div class="oe_title">
+                    <h4>
+                        <field name="credit_limit_message"/>
+                        <field name="credit_limit_value" widget='monetary'/>
+                    </h4>
+                </div>
+            </group>
+                <group>
+                    <div class="oe_title">
+                        <h4>
+                            <field name="message_sale_overdue" widget="char"/>
+                            <field name="message" widget="char"/>
+                        </h4>
+                    </div>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" type="object" name="action_draft" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

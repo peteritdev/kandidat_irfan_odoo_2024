@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_partner_sale_division_form_inherit" model="ir.ui.view">
+            <field name="name">view.partner.sale.division.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="groups_id" eval="[(4, ref('product.group_product_pricelist'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']" position="after">
+                    <page name="sale_divisi" string="Divisi Penjualan">
+                        <field name="sale_division_ids">
+                            <tree string="Divisi Penjualan" editable="bottom">
+                                <field name="sale_division_id" optional="show"/>
+                                <field name="credit_limit" optional="show"/>
+                                <field name="limit_used" optional="show"/>
+                                <field name="remaining_limit" optional="show"/>
+                                <field name="over_limit" optional="show"/>
+                                <button type="object" name="action_view_sale_order" string="sales person" class="oe_highlight"/>
+                            </tree>
+                            <form string="Divisi Penjualan">
+                                <group>
+                                    <group>
+                                        <field name="sale_division_id"/>
+                                        <field name="credit_limit"/>
+                                        <field name="limit_used"/>
+                                        <field name="remaining_limit"/>
+                                        <field name="over_limit"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                        </page> 
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form_inherit" model="ir.ui.view">
+            <field name="name">view.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="product.view_partner_property_form"/>
+            <field name="groups_id" eval="[(4, ref('product.group_product_pricelist'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_product_pricelist']" position="attributes">
+                    <attribute name="invisible">1</attribute> 
+                </xpath>
+            </field>
+        </record>
+</odoo>

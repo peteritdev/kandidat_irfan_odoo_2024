@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_product_sale_division_form_inherit" model="ir.ui.view">
+            <field name="name">view.product.sale.division.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="sale_division_id"/>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="before">
+                    <field name="take_in_plant" widget='monetary' options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_sale_division_form_normal_inherit" model="ir.ui.view">
+            <field name="name">view.product.sale.division.form.normal.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="sale_division_id"/>
+                </xpath>
+                <xpath expr="//label[@for='lst_price']" position="before">
+                    <field name="take_in_plant" widget='monetary' options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </xpath>
+                </field>
+        </record>
+
+        <record id="view_product_sale_division_tree_inherit" model="ir.ui.view">
+            <field name="name">view.product.sale.division.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="sale_division_id"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_sale_division_tree" model="ir.ui.view">
+        <field name="name">view_sale_division_tree</field>
+        <field name="model">sale.division</field>
+        <field name="arch" type="xml">
+            <tree string="Sale Division" editable="bottom">
+                <field name="name" optional="show"/>
+                <field name="note" optional="show"/>
+                <field name="price_list_id" optional="show"/>
+                <field name="company_id" optional="hide"/>
+                <field name="currency_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sale_division_form" model="ir.ui.view">
+        <field name="name">view.sale.division.form</field>
+        <field name="model">sale.division</field>
+        <field name="arch" type="xml">
+            <form string="Sale Division" edit="0">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="note"/>
+                        <field name="price_list_id"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sale_division_view" model="ir.ui.view">
+        <field name="name">product.sale.division.kanban.view</field>
+        <field name="model">sale.division</field>
+        <field name="arch" type="xml">
+            <kanban sample="1">
+                <field name="name"/>
+                <field name="note"/>
+                <field name="price_list_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    <field name="note"/>
+                                </strong>
+                                <ul>
+                                    <li><strong>Price List: <field name="price_list_id"></field></strong></li>
+                                </ul>
+                                <div name="tags"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_sale_division_filter" model="ir.ui.view">
+        <field name="name">view.sale.division.filter</field>
+        <field name="model">sale.division</field>
+        <field name="arch" type="xml">
+            <search string="Sale Division">
+                <field name="name"/>
+                <field name="company_id"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Name" name="name" context="{'group_by': 'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- actions -->
+
+    <record id="view_sale_division_action" model="ir.actions.act_window">
+        <field name="name">Divisi</field>
+        <field name="res_model">sale.division</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="view_sale_division_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Sale Division records found
+            </p><p>
+                The Sale Division records will be displayed here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_sale_division" 
+            name="Divisi Penjualan"
+            action="view_sale_division_action"
+            groups="sales_team.group_sale_manager"
+            parent="sale.menu_sale_config" sequence="2"/>
+    <menuitem id="menu_price_list_sale" 
+            name="Price List"
+            action="product.product_pricelist_action2"
+            groups="sales_team.group_sale_manager"
+            parent="sale.prod_config_main" sequence="2"/>
+            
+</odoo>

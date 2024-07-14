@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_confirm_wizard_sale_overdue_form" model="ir.ui.view">
+        <field name="name">confirm.wizard.sale.overdue.form</field>
+        <field name="model">confirm.wizard.sale.overdue</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Sale Order Overdue">
+            <group>
+                <div class="oe_title">
+                    <h4>
+                        <field name="message_warning"/>
+                    </h4>
+                </div>
+            </group>
+            <group>
+                <div class="oe_title">
+                    <h4>
+                        <field name="message_sale_overdue"/>
+                        <field name="message"/>
+                    </h4>
+                </div>
+            </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" type="object" name="action_draft" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

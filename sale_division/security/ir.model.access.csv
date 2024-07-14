@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_division_user,access.sale.division.user,model_sale_division,account.group_account_user,1,1,1,1
+access_sale_division_manager,access.sale.division.manager,model_sale_division,account.group_account_manager,1,1,1,1
+
+access_sale_division_partner_line_user,access.sale.division.partner.line.user,model_sale_division_partner_line,account.group_account_user,1,1,1,1
+access_sale.division_partner_line_manager,access.sale.division.partner.line.manager,model_sale_division_partner_line,account.group_account_manager,1,1,1,1
+access_sale.confirm_wizard_sale,access.confirm.wizard.sale,model_confirm_wizard_sale,,1,1,1,1
+access_sale.confirm_wizard_sale_overdue,access.confirm.wizard.sale.overdue,model_confirm_wizard_sale_overdue,,1,1,1,1
