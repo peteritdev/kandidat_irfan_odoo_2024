@@ -61,6 +61,7 @@ class DailyReportInventory(models.TransientModel):
             FROM stock_move move
             WHERE (move.location_id in %s or move.location_dest_id in %s)
                 and move.state = 'done' and move.product_id in %s
+                and CAST(move.date AS date) >= %s
                 and CAST(move.date AS date) <= %s
             ORDER BY move.date, move.reference
             """,
@@ -71,6 +72,7 @@ class DailyReportInventory(models.TransientModel):
                 tuple(locations.ids),
                 tuple(locations.ids),
                 tuple(self.product_ids.ids),
+                self.from_date,
                 self.to_date,
             ),
             )
